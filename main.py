@@ -182,6 +182,7 @@ class Pieces(pygame.sprite.Sprite):
     def __init__(self, picPath, posX, posY, name):
         super(Pieces, self).__init__()
         self.image = pygame.image.load(picPath)
+        self.image = pygame.transform.scale(self.image, (50,50))
         self.posX = posX
         self.posY = posY
         self.name = name
@@ -192,6 +193,11 @@ class Pieces(pygame.sprite.Sprite):
 
 ludoBImg = pygame.image.load("ludoBoard2.png")
 ludoBImg = pygame.transform.scale(ludoBImg, (780, 720))
+
+rollButton = pygame.image.load("rollButton.png")
+rollButton.convert()
+rollButtonRect = rollButton.get_rect(topleft=(950,200))
+
 
 global pieceX, pieceY, pieceLoc, pieceCounter, startX, startY
 
@@ -297,10 +303,6 @@ for i in range(len(players)):
         
         yelP3 = Pieces("yel.png", pieceX[3][3], pieceY[3][3], "yelP3")
         PiecesGroup.add(yelP3)
-
-
-rollButton = Pieces("rollButton.png", 1000, 150, "Roll")
-PiecesGroup.add(rollButton)
 
 
 def diceRoll():
@@ -575,7 +577,7 @@ while gameFinished == False:
         if event.type == MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
 
-            if rollButton.rect.collidepoint(pos) and rollsRemaining == 0 and turndone == True:
+            if rollButtonRect.collidepoint(pos) and rollsRemaining == 0 and turndone == True:
                 print("Rolling")
                 rolls = diceRoll()
                 dicerolled = True
@@ -807,6 +809,7 @@ while gameFinished == False:
     
     screen.fill((7, 15, 41))
     screen.blit(ludoBImg, (0, 0))
+    screen.blit(rollButton, (950,200))
     screen.blit(gameWindowPlayerSurface, (850, 350))
     screen.blit(rolledTextS, (850, 450))
     screen.blit(rollTextS, (850, 550))
