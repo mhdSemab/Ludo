@@ -299,7 +299,7 @@ for i in range(len(players)):
         PiecesGroup.add(yelP3)
 
 
-rollButton = Pieces("rollButton.png", 1000, 180, "Roll")
+rollButton = Pieces("rollButton.png", 1000, 150, "Roll")
 PiecesGroup.add(rollButton)
 
 
@@ -350,6 +350,7 @@ def movement(name, rolled, index):
     print(name)
 
     print(index,": is the index")
+
     for i in range(len(rolled)):
         moves = pieceDirections(pieceC, pieceCounter[index][pieceN[0]], rolled[i])
         if pieceLoc[index][pieceN[0]] == "b":
