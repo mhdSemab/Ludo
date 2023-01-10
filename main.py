@@ -535,8 +535,33 @@ def highscore():
     #tell user if they beat the time
     #only save high score nothing else
 
+def pieceCheck(playerName, array):
+    counter = 0
+    index = 0
+    howMany = [0,0,0]
 
+    if playerName.lower() == "green":
+        index = 1
+    
+    elif playerName.lower() == "blue":
+        index = 2
 
+    elif playerName.lower() == "yellow":
+        index = 3
+
+    while counter != 4:
+        if array[index][counter] == "h": #h means at home
+            howMany[0] += 1
+
+        if array[index][counter] == "b": #b means on board
+            howMany[1] += 1
+
+        if array[index][counter] == "f":#f means finished
+            howMany[2] += 1
+
+        counter += 1
+    
+    return howMany
 
 while gameFinished == False:
     gameWindowPlayerSurface = gameWindowPlayer.render(players[playerQueueNum].upper() + " SHOULD BE ROLLING", False, (131, 202, 180))
